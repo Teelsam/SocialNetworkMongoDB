@@ -30,7 +30,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    async deleteUser(req, res) {
+    async deleteUser(req, res) {//deletes a user
         try {
             const user = await User.findOneAndDelete({ _id: req.params.userId });
             if (!user) {
