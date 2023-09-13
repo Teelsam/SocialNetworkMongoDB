@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router();//requires express package
 const { getThoughts, get1Thought, createThought, addReaction } = require('../../controllers/thoughtController');
 
 

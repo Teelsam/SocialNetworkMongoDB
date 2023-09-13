@@ -1,12 +1,12 @@
-const { Thought } = require('../models'); //imports thought model
+const { Thought } = require('../models'); //imports Thought model
 
 module.exports = {
     async getThoughts(req, res) { //gets all thoughts
         try {
             const thoughts = await Thought.find();
-            res.json(thoughts);
+            res.json(thoughts);// returns the thoughts as a JSON
         } catch (err) {
-            console.log(err);
+            console.log(err);//if error prints errors content.
             res.status(500).json(err);
         }
     },
@@ -17,7 +17,7 @@ module.exports = {
             if (!thought) {
                 return res.status(404).json({ message: "no such thought" });
             }
-            res.json(thought);
+            res.json(thought); //returns single thought as JSON
         } catch (err) {
             res.status(404).json(err);
         }
@@ -41,7 +41,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    async addReaction(req, res) {
+    async addReaction(req, res) { //adds a reaction to a thought
         try {
             const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $push: { reactions: req.body } });
             res.json(thought);
