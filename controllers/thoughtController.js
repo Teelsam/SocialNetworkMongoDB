@@ -23,7 +23,7 @@ module.exports = {
         }
 
     },
-    async createThought(req, res) {//create a user
+    async createThought(req, res) {//create a thought
         try {
             const thought = await Thought.create(req.body);
             res.json(thought);
