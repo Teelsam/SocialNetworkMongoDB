@@ -1,4 +1,4 @@
-const { User } = require('../models/User');
+const User = require('../models/User');
 
 
 module.exports = {
@@ -7,6 +7,7 @@ module.exports = {
             const users = await User.find();
             res.json(users);
         } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     },
@@ -36,7 +37,9 @@ module.exports = {
             if (!user) {
                 return res.status(404).json({ message: 'no such user' });
             }
+            res.json(user);
         } catch (err) {
+
             res.status(500).json(err);
         }
     }

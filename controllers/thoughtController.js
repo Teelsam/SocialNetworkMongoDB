@@ -6,6 +6,7 @@ module.exports = {
             const thoughts = await Thought.find();
             res.json(thoughts);
         } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     },
@@ -22,6 +23,14 @@ module.exports = {
         }
 
     },
+    async createThought(req, res) {//create a user
+        try {
+            const thought = await Thought.create(req.body);
+            res.json(thought);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
     async deleteThought(req, res) {//deletes a thought
         try {
             const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
@@ -29,6 +38,15 @@ module.exports = {
                 return res.status(404).json({ message: "no such thought" });
             }
         } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    async addReaction(req, res) {
+        try {
+            const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $push: { reactions: req.body } });
+            res.json(thought);
+        } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     }
